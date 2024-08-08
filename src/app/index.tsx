@@ -1,18 +1,17 @@
 import { images } from '@/constants';
 import { router } from 'expo-router';
-import React, { useState } from 'react';
-import { Image, Pressable, SafeAreaView, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Image, Pressable, Text, View } from 'react-native';
 import {
   Directions,
   Gesture,
-  GestureDetector,
+  GestureDetector
 } from 'react-native-gesture-handler';
 import Animated, {
   FadeIn,
-  FadeOut,
-  SlideInRight,
-  SlideOutLeft
+  FadeOut
 } from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const onboardingSteps = [
   {
@@ -35,7 +34,6 @@ const onboardingSteps = [
 
 export default function index() {
   const [screenIndex, setScreenIndex] = useState(0);
-
   const data = onboardingSteps[screenIndex];
 
   const onContinue = () => {
@@ -49,10 +47,8 @@ export default function index() {
 
   const onBack = () => {
     const isFirstScreen = screenIndex === 0;
-    if (isFirstScreen) {
-      endOnboarding();
-    } else {
-      setScreenIndex(screenIndex - 1);
+    if (!isFirstScreen) {
+      setScreenIndex(screenIndex - 1); 
     }
   };
 
@@ -67,7 +63,17 @@ export default function index() {
   );
 
   return (
-    <SafeAreaView className='flex-1 justify-center bg-white'>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF', justifyContent: 'center' }}>
+      <View className='flex-row gap-2 mx-4 mt-5'>
+        {onboardingSteps.map((step, index) => (
+          <View
+            key={index}
+            className='flex-1 h-1 rounded-lg'
+            style={{ backgroundColor: index === screenIndex ? '#5DCCFC' : '#625D5D' }}
+          />
+        ))}
+      </View>
+
       <GestureDetector gesture={swipes}>
         <View className='flex-1 p-6' key={screenIndex}>
           <Animated.View entering={FadeIn} exiting={FadeOut}>
@@ -76,15 +82,15 @@ export default function index() {
 
           <View className='mt-auto'>
             <Animated.Text
-              entering={SlideInRight}
-              exiting={SlideOutLeft}
+              entering={FadeIn}
+              exiting={FadeOut}
               className='text-zinc-950 text-3xl my-3'
             >
               {data.title}
             </Animated.Text>
             <Animated.Text
-              entering={SlideInRight.delay(50)}
-              exiting={SlideOutLeft}
+              entering={FadeIn.delay(50)}
+              exiting={FadeOut}
               className='text-zinc-300 text-xl'
             >
               {data.description}
