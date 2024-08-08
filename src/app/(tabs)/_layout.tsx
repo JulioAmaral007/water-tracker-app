@@ -26,7 +26,7 @@ export default function TabLayout() {
           }}
         />
         
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="create"
           options={{
             title: 'Create',
@@ -48,7 +48,7 @@ export default function TabLayout() {
             title: 'Profile',
             headerShown: false,
           }}
-        />
+        /> */}
       </Tabs>
     </>
   );
