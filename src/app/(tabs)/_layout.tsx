@@ -1,54 +1,48 @@
 import { Tabs } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { TabBar } from '../../components/tabBar/TabBar';
 
 export default function TabLayout() {
   return (
     <>
-      <StatusBar backgroundColor="#121212" style="light" />
-      
-      <Tabs
-        screenOptions={{
-          tabBarActiveTintColor: "#0091EA",
-          tabBarShowLabel: false,
-          tabBarStyle: {
-            backgroundColor: "#121212",
-            borderTopWidth: 1,
-            borderTopColor: "#121212",
-            height: 60,
-          },
-        }}
-      >
+      <StatusBar backgroundColor="#FFFFFF" style="dark" />
+
+      <Tabs tabBar={(props) => <TabBar {...props} />}>
         <Tabs.Screen
           name="home"
           options={{
+            headerShown: false,
             title: 'Home',
-            headerShown: false,
           }}
         />
-        
-        {/* <Tabs.Screen
-          name="create"
-          options={{
-            title: 'Create',
-            headerShown: false,
-          }}
-        />
-
         <Tabs.Screen
-          name="bookmark"
+          name="analysis"
           options={{
-            title: 'Bookmark',
             headerShown: false,
+            title: 'Explore',
           }}
         />
-
+        <Tabs.Screen
+          name="alarm"
+          options={{
+            headerShown: false,
+            title: 'Alarm',
+          }}
+        />
         <Tabs.Screen
           name="profile"
           options={{
-            title: 'Profile',
             headerShown: false,
+            title: 'Profile',
           }}
-        /> */}
+        />
+        <Tabs.Screen
+          name="settings"
+          options={{
+            headerShown: false,
+            title: 'Settings',
+          }}
+        />
       </Tabs>
     </>
   );
